@@ -2,7 +2,7 @@ package com.musinsa.shop.domain.rank.service;
 
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Item;
-import com.musinsa.shop.domain.rank.entity.BrandOrderByPriceSum;
+import com.musinsa.shop.domain.rank.entity.BrandInfoByPriceSum;
 import com.musinsa.shop.domain.rank.repository.BrandOrderByPriceSumRepository;
 import com.musinsa.shop.domain.rank.repository.RankItemByCategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class RankAggregator {
         Iterable<Brand> brands = brandItemExtractor.findAllBrand();
         for (Brand brand : brands) {
             long sum = brand.getItems().stream().mapToLong(Item::getPrice).sum();
-            brandOrderByPriceSumRepository.save(new BrandOrderByPriceSum(brand.getId(), brand.getName(), sum));
+            brandOrderByPriceSumRepository.save(new BrandInfoByPriceSum(brand.getId(), brand.getName(), sum));
         }
     }
 

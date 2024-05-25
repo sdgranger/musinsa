@@ -7,13 +7,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @EqualsAndHashCode(of = "brandId")
-public class BrandOrderByPriceSum {
+public class BrandInfoByPriceSum {
     private Long sumId;
     private Long brandId;
     private String brandName;
     private Long sumPrice;
 
-    public BrandOrderByPriceSum(Long brandId, String brandName, long sumPrice) {
+    public BrandInfoByPriceSum(Long brandId, String brandName, long sumPrice) {
         this.sumId = BrandPriceSumIdGenerator.getAndIncrement();
         this.brandId = brandId;
         this.brandName = brandName;
@@ -41,5 +41,9 @@ public class BrandOrderByPriceSum {
         public static Long getAndIncrement(){
             return BrandPriceSumIdGenerator.ATOMIC_ID.getAndIncrement();
         }
+    }
+
+    public Long getId() {
+        return brandId;
     }
 }
