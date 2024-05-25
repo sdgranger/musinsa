@@ -21,6 +21,8 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
         show_sql: true
         format_sql: true
+        default_batch_fetch_size: 50
+
     defer-datasource-initialization: true
   sql:
     init:

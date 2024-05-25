@@ -87,7 +87,7 @@ class SortedProductByCategoryLocalRepositoryTest {
         sortedProductByCategoryLocalRepository.saveAllSorted(products);
 
         //when
-        List<Product> lowPriceProductByCategory = sortedProductByCategoryLocalRepository.findLowPriceProductByCategory();
+        List<Product> lowPriceProductByCategory = sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory();
 
         //then
         assertEquals(100000, lowPriceProductByCategory.get(0).getPrice());
