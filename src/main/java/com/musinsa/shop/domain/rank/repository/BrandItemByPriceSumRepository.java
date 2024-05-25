@@ -4,7 +4,7 @@ import com.musinsa.shop.domain.rank.entity.BrandInfoByPriceSum;
 
 import java.util.Optional;
 
-public interface BrandOrderByPriceSumRepository {
+public interface BrandItemByPriceSumRepository {
     void save(BrandInfoByPriceSum brandInfoByPriceSum);
 
     Optional<BrandInfoByPriceSum> findLowestBrand();
