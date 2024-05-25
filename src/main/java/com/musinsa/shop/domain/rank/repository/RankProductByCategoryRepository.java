@@ -10,4 +10,6 @@ public interface RankProductByCategoryRepository {
     List<Product> findLowPriceProductByCategory();
 
     List<Product> findByCategoryId(Long categoryId);
+
+    void delete(List<Product> products);
 }

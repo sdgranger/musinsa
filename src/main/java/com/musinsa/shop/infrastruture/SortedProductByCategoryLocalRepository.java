@@ -57,6 +57,7 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
         return sortedProductByCategoryId.get(categoryId).stream().toList();
     }
 
+    @Override
     public void delete(List<Product> products) {
         for (Product product : products) {
             SortedSet<Product> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
