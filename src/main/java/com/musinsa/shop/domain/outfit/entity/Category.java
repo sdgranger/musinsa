@@ -1,9 +1,7 @@
-package com.musinsa.shop.domain.outfit.domain;
+package com.musinsa.shop.domain.outfit.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import java.util.List;
 
 @Entity
 @Getter

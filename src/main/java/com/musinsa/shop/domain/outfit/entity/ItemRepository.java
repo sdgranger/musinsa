@@ -1,4 +1,4 @@
-package com.musinsa.shop.domain.outfit.domain;
+package com.musinsa.shop.domain.outfit.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

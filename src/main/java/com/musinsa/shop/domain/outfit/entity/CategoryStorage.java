@@ -1,4 +1,4 @@
-package com.musinsa.shop.domain.outfit.domain;
+package com.musinsa.shop.domain.outfit.entity;
 
 import com.musinsa.shop.error.NotFoundException;
 
