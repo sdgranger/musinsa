@@ -15,4 +15,14 @@ public class Category {
     protected Category() {
 
     }
+
+    private Category(String name) {
+        this.name = name;
+    }
+
+    protected Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
 }

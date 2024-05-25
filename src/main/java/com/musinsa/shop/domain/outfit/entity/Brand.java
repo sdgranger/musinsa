@@ -15,10 +15,10 @@ public class Brand {
     @Column(length = 50, unique = true, nullable = false)
     private String name;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<Item> items;
+    private List<Product> products;
     private Brand(String name) {
         this.name = name;
-        this.items = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
 
     protected Brand() {
@@ -29,7 +29,7 @@ public class Brand {
         return new Brand(name);
     }
 
-    public void addItem(Item item) {
-        this.items.add(item);
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 }

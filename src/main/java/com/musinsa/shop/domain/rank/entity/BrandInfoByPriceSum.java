@@ -21,17 +21,17 @@ public class BrandInfoByPriceSum {
     }
 
     @Getter
-    public static class CategoryItem {
+    public static class CategoryProduct {
         private final String categoryName;
         private final Long price;
 
-        private CategoryItem(String categoryName, Long price) {
+        private CategoryProduct(String categoryName, Long price) {
             this.categoryName = categoryName;
             this.price = price;
         }
 
-        public static CategoryItem create(String categoryName, long price) {
-            return new CategoryItem(categoryName, price);
+        public static CategoryProduct create(String categoryName, long price) {
+            return new CategoryProduct(categoryName, price);
         }
     }
 

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Entity
 @Getter
 @EqualsAndHashCode(of = "id")
-public class Item {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,18 +19,26 @@ public class Item {
     @Column(nullable = false)
     private Long price;
 
-    protected Item() {}
+    protected Product() {}
 
-    private Item(Category category, Brand brand, long price) {
+    private Product(Category category, Brand brand, long price) {
         this.category = category;
         this.brand = brand;
         this.price = price;
 
-        this.brand.addItem(this);
+        this.brand.addProduct(this);
     }
 
-    public static Item create(Category category, Brand brand, long price) {
-        return new Item(category, brand, price);
+    protected Product(Long id, Category category, Brand brand, long price) {
+        this.id = id;
+        this.category = category;
+        this.brand = brand;
+        this.price = price;
+        this.brand.addProduct(this);
+    }
+
+    public static Product create(Category category, Brand brand, long price) {
+        return new Product(category, brand, price);
     }
 
     public void changePrice(Long price) {

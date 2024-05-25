@@ -20,7 +20,7 @@ values ('A'),
        ('H'),
        ('I');
 
-insert into `item` (`category_id`, `brand_id`, `price`)
+insert into `product` (`category_id`, `brand_id`, `price`)
 values (1, 1, 11200),
        (1, 2, 10500),
        (1, 3, 10000),
