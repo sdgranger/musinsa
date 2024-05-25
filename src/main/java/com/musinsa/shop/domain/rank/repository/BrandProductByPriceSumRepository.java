@@ -1,13 +1,13 @@
 package com.musinsa.shop.domain.rank.repository;
 
-import com.musinsa.shop.domain.rank.entity.BrandInfoByPriceSum;
+import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
 
 public interface BrandProductByPriceSumRepository {
-    void save(BrandInfoByPriceSum brandInfoByPriceSum);
+    void save(BrandInfoByLowestPriceSum brandInfoByLowestPriceSum);
 
-    BrandInfoByPriceSum findLowestBrand();
+    BrandInfoByLowestPriceSum findBrandByLowestPriceSum();
 
-    void delete(BrandInfoByPriceSum brandInfoByPriceSum);
+    void delete(BrandInfoByLowestPriceSum brandInfoByLowestPriceSum);
 
-    boolean contains(BrandInfoByPriceSum brandId);
+    boolean contains(BrandInfoByLowestPriceSum brandId);
 }

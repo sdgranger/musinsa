@@ -7,13 +7,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @EqualsAndHashCode(of = "brandId")
-public class BrandInfoByPriceSum {
+public class BrandInfoByLowestPriceSum {
     private Long sumId;
     private Long brandId;
     private String brandName;
     private Long sumPrice;
 
-    public BrandInfoByPriceSum(Long brandId, String brandName, long sumPrice) {
+    public BrandInfoByLowestPriceSum(Long brandId, String brandName, long sumPrice) {
         this.sumId = BrandPriceSumIdGenerator.getAndIncrement();
         this.brandId = brandId;
         this.brandName = brandName;

@@ -40,7 +40,7 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
     }
 
     @Override
-    public List<Product> findLowPriceProductByCategory() {
+    public List<Product> findLowestPriceProductByCategory() {
         List<Product> list = new ArrayList<>();
         for (Long key : sortedProductByCategoryId.keySet()) {
             list.add(sortedProductByCategoryId.get(key).first());

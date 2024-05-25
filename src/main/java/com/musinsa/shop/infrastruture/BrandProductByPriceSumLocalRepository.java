@@ -1,6 +1,6 @@
 package com.musinsa.shop.infrastruture;
 
-import com.musinsa.shop.domain.rank.entity.BrandInfoByPriceSum;
+import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 @Repository
 public class BrandProductByPriceSumLocalRepository implements BrandProductByPriceSumRepository {
-    private final SortedSet<BrandInfoByPriceSum> lowestSumPriceProductByBrandId = new ConcurrentSkipListSet<>((o1, o2) -> {
+    private final SortedSet<BrandInfoByLowestPriceSum> lowestSumPriceProductByBrandId = new ConcurrentSkipListSet<>((o1, o2) -> {
         if (o1.equals(o2)) {
             return 0;
         }
@@ -18,13 +18,13 @@ public class BrandProductByPriceSumLocalRepository implements BrandProductByPric
     });
 
     @Override
-    public void save(BrandInfoByPriceSum brandInfoByPriceSum) {
+    public void save(BrandInfoByLowestPriceSum brandInfoByPriceSum) {
         lowestSumPriceProductByBrandId.remove(brandInfoByPriceSum);
         lowestSumPriceProductByBrandId.add(brandInfoByPriceSum);
     }
 
     @Override
-    public BrandInfoByPriceSum findLowestBrand() {
+    public BrandInfoByLowestPriceSum findBrandByLowestPriceSum() {
         if (lowestSumPriceProductByBrandId.isEmpty()) {
             return null;
         }
@@ -32,12 +32,12 @@ public class BrandProductByPriceSumLocalRepository implements BrandProductByPric
     }
 
     @Override
-    public void delete(BrandInfoByPriceSum brandInfoByPriceSum) {
+    public void delete(BrandInfoByLowestPriceSum brandInfoByPriceSum) {
         lowestSumPriceProductByBrandId.remove(brandInfoByPriceSum);
     }
 
     @Override
-    public boolean contains(BrandInfoByPriceSum brandId) {
+    public boolean contains(BrandInfoByLowestPriceSum brandId) {
         return lowestSumPriceProductByBrandId.contains(brandId);
     }
 }
