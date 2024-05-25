@@ -1,5 +1,6 @@
-package com.musinsa.shop.domain.outfit.entity;
+package com.musinsa.shop.domain.outfit.repository;
 
+import com.musinsa.shop.domain.outfit.entity.Brand;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

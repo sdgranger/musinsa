@@ -1,5 +1,6 @@
-package com.musinsa.shop.domain.outfit.entity;
+package com.musinsa.shop.domain.outfit.repository;
 
+import com.musinsa.shop.domain.outfit.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
