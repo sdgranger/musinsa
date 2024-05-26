@@ -21,7 +21,7 @@ public class RankAggregator {
     @Transactional
     public void execute() {
         aggregatePriceProductByCategory();
-        lowestPriceProductByBrandAggregation();
+        aggregateLowestPriceProductByBrand();
     }
 
     private void aggregatePriceProductByCategory() {
@@ -30,7 +30,7 @@ public class RankAggregator {
         rankProductByCategoryRepository.saveAllSorted(all);
     }
 
-    private void lowestPriceProductByBrandAggregation() {
+    private void aggregateLowestPriceProductByBrand() {
         List<Brand> brands = brandProductExtractor.findAllBrand();
         for (Brand brand : brands) {
             long sum = brand.getProducts().stream().mapToLong(Product::getPrice).sum();
