@@ -27,7 +27,7 @@
   삭제 DELETE /api/brand/products
   ~~~ 
 ### 구현
-<img src="./img2.png">
+<img src="./img1.png">
 - 브랜드, 상품에 대한 변경사항이 발생할때 이벤트 발행 및 구독으로 데이터를 수집했습니다.
 
 --- 
