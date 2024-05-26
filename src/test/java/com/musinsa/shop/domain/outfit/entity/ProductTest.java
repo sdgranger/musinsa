@@ -10,8 +10,8 @@ class ProductTest {
     void createTest() {
         Category category = Category.create("상의");
         Brand brand = Brand.create("A");
-
         Product product = Product.create(category, brand, 10000L);
+        brand.addProduct(product);
 
         assertEquals(1, brand.getProducts().size());
         assertEquals(brand, brand.getProducts().get(0).getBrand());
