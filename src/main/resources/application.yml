@@ -22,7 +22,6 @@ spring:
         show_sql: true
         format_sql: true
         default_batch_fetch_size: 50
-
     defer-datasource-initialization: true
   sql:
     init:
@@ -31,5 +30,7 @@ spring:
 
 springdoc:
   swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
     enabled: true
   default-produces-media-type: application/json

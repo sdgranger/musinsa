@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class BrandProductService {
+public class BrandProductFindService {
     private final BrandRepository brandRepository;
 
     public List<Product> findAllProducts() {

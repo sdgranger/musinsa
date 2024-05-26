@@ -2,7 +2,7 @@ package com.musinsa.shop.config;
 
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
-import com.musinsa.shop.domain.outfit.service.BrandProductService;
+import com.musinsa.shop.domain.outfit.service.BrandProductFindService;
 import com.musinsa.shop.domain.rank.service.BrandProductExtractor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ConfigurationBrandProductExtractor implements BrandProductExtractor {
-    private final BrandProductService brandProductService;
+    private final BrandProductFindService brandProductService;
 
     @Override
     public List<Product> findAllProducts() {
