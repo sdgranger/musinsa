@@ -14,7 +14,8 @@
   ~~~
   GET /api/rank/brand/lowest-price-sum
   ~~~
-### 구현![img1.png](img2.png)
+### 구현
+<img src="./img2.png">
 - data.sql 로 구동 시 상품 데이터를 세팅하였고 ApplicationRunner 로 조회를 위한 데이터를 수집(Aggregator)했습니다.
 
 ---
@@ -25,7 +26,8 @@
   변경 PUT    /api/brand/products
   삭제 DELETE /api/brand/products
   ~~~ 
-### 구현![img1.png](img1.png)
+### 구현
+<img src="./img2.png">
 - 브랜드, 상품에 대한 변경사항이 발생할때 이벤트 발행 및 구독으로 데이터를 수집했습니다.
 
 --- 
