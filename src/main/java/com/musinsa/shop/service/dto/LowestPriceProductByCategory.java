@@ -1,6 +1,6 @@
 package com.musinsa.shop.service.dto;
 
-import com.musinsa.shop.domain.outfit.entity.Product;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import lombok.Getter;
 
 @Getter
@@ -17,7 +17,7 @@ public class LowestPriceProductByCategory {
         this.price = price;
     }
 
-    public static LowestPriceProductByCategory from(Product product) {
+    public static LowestPriceProductByCategory from(RankProduct product) {
         return new LowestPriceProductByCategory(product.getId(), product.getBrand().getName(), product.getCategoryName(), product.getPrice());
     }
 }

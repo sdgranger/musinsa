@@ -1,8 +1,8 @@
 package com.musinsa.shop.infrastruture;
 
 import com.musinsa.shop.domain.outfit.entity.*;
-import com.musinsa.shop.domain.outfit.entity.ProductMock;
-import com.musinsa.shop.domain.outfit.entity.Product;
+import com.musinsa.shop.domain.rank.entity.RankBrand;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.RankProductByCategoryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,43 +18,43 @@ class SortedProductByCategoryLocalRepositoryTest {
     @DisplayName("상품을 저장할때 ")
     void saveAllSorted() {
         //given
-        List<Product> products = List.of(
-                ProductMock.create(1L, CategoryMock.create(1L, "상의"), Brand.create("A"), 100000),
-                ProductMock.create(2L, CategoryMock.create(2L, "아우터"), Brand.create("A"), 110000),
-                ProductMock.create(3L, CategoryMock.create(3L, "바지"), Brand.create("A"), 120000),
-                ProductMock.create(4L, CategoryMock.create(4L, "스니커즈"), Brand.create("A"), 130000),
-                ProductMock.create(5L, CategoryMock.create(5L, "가방"), Brand.create("A"), 140000),
-                ProductMock.create(6L, CategoryMock.create(6L, "모자"), Brand.create("A"), 150000),
-                ProductMock.create(7L, CategoryMock.create(7L, "양말"), Brand.create("A"), 160000),
-                ProductMock.create(8L, CategoryMock.create(8L, "액새서리"), Brand.create("A"), 170000),
+        List<RankProduct> products = List.of(
+                RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 100000),
+                RankProductMock.create(2L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "A"), 110000),
+                RankProductMock.create(3L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "A"), 120000),
+                RankProductMock.create(4L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "A"), 130000),
+                RankProductMock.create(5L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "A"), 140000),
+                RankProductMock.create(6L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "A"), 150000),
+                RankProductMock.create(7L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "A"), 160000),
+                RankProductMock.create(8L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "A"), 170000),
 
-                ProductMock.create(9L, CategoryMock.create(1L, "상의"), Brand.create("B"), 140000),
-                ProductMock.create(10L, CategoryMock.create(2L, "아우터"), Brand.create("B"), 100000),
-                ProductMock.create(11L, CategoryMock.create(3L, "바지"), Brand.create("B"), 130000),
-                ProductMock.create(12L, CategoryMock.create(4L, "스니커즈"), Brand.create("B"), 110000),
-                ProductMock.create(13L, CategoryMock.create(5L, "가방"), Brand.create("B"), 140000),
-                ProductMock.create(14L, CategoryMock.create(6L, "모자"), Brand.create("B"), 110000),
-                ProductMock.create(15L, CategoryMock.create(7L, "양말"), Brand.create("B"), 190000),
-                ProductMock.create(16L, CategoryMock.create(8L, "액새서리"), Brand.create("B"), 100000)
+                RankProductMock.create(9L, RankCategoryMock.create(1L, "상의"), RankBrand.create(2L, "B"), 140000),
+                RankProductMock.create(10L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(2L, "B"), 100000),
+                RankProductMock.create(11L, RankCategoryMock.create(3L, "바지"), RankBrand.create(2L, "B"), 130000),
+                RankProductMock.create(12L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(2L, "B"), 110000),
+                RankProductMock.create(13L, RankCategoryMock.create(5L, "가방"), RankBrand.create(2L, "B"), 140000),
+                RankProductMock.create(14L, RankCategoryMock.create(6L, "모자"), RankBrand.create(2L, "B"), 110000),
+                RankProductMock.create(15L, RankCategoryMock.create(7L, "양말"), RankBrand.create(2L, "B"), 190000),
+                RankProductMock.create(16L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(2L, "B"), 100000)
         );
 
         //when
         sortedProductByCategoryLocalRepository.saveAllSorted(products);
 
         //then
-        List<Product> byCategoryIdIsOne = sortedProductByCategoryLocalRepository.findByCategoryId(1L);
+        List<RankProduct> byCategoryIdIsOne = sortedProductByCategoryLocalRepository.findByCategoryId(1L);
         assertEquals(100000, byCategoryIdIsOne.get(0).getPrice());
         assertEquals(140000, byCategoryIdIsOne.get(1).getPrice());
-        List<Product> byCategoryIdIsTwo = sortedProductByCategoryLocalRepository.findByCategoryId(2L);
+        List<RankProduct> byCategoryIdIsTwo = sortedProductByCategoryLocalRepository.findByCategoryId(2L);
         assertEquals(100000, byCategoryIdIsTwo.get(0).getPrice());
         assertEquals(110000, byCategoryIdIsTwo.get(1).getPrice());
-        List<Product> byCategoryIdIsThree = sortedProductByCategoryLocalRepository.findByCategoryId(3L);
+        List<RankProduct> byCategoryIdIsThree = sortedProductByCategoryLocalRepository.findByCategoryId(3L);
         assertEquals(120000, byCategoryIdIsThree.get(0).getPrice());
         assertEquals(130000, byCategoryIdIsThree.get(1).getPrice());
-        List<Product> byCategoryIdIsFour = sortedProductByCategoryLocalRepository.findByCategoryId(4L);
+        List<RankProduct> byCategoryIdIsFour = sortedProductByCategoryLocalRepository.findByCategoryId(4L);
         assertEquals(110000, byCategoryIdIsFour.get(0).getPrice());
         assertEquals(130000, byCategoryIdIsFour.get(1).getPrice());
-        List<Product> byCategoryIdIsFive = sortedProductByCategoryLocalRepository.findByCategoryId(5L);
+        List<RankProduct> byCategoryIdIsFive = sortedProductByCategoryLocalRepository.findByCategoryId(5L);
         assertEquals(140000, byCategoryIdIsFive.get(1).getPrice());
         assertEquals(140000, byCategoryIdIsFive.get(0).getPrice());
         assertEquals(13L, byCategoryIdIsFive.get(0).getId());
@@ -65,29 +65,29 @@ class SortedProductByCategoryLocalRepositoryTest {
     @Test
     void findLowPriceProductByCategory() {
         //given
-        List<Product> products = List.of(
-                ProductMock.create(1L, CategoryMock.create(1L, "상의"), Brand.create("A"), 100000),
-                ProductMock.create(2L, CategoryMock.create(2L, "아우터"), Brand.create("A"), 110000),
-                ProductMock.create(3L, CategoryMock.create(3L, "바지"), Brand.create("A"), 120000),
-                ProductMock.create(4L, CategoryMock.create(4L, "스니커즈"), Brand.create("A"), 130000),
-                ProductMock.create(5L, CategoryMock.create(5L, "가방"), Brand.create("A"), 140000),
-                ProductMock.create(6L, CategoryMock.create(6L, "모자"), Brand.create("A"), 150000),
-                ProductMock.create(7L, CategoryMock.create(7L, "양말"), Brand.create("A"), 160000),
-                ProductMock.create(8L, CategoryMock.create(8L, "액새서리"), Brand.create("A"), 170000),
+        List<RankProduct> products = List.of(
+                RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 100000),
+                RankProductMock.create(2L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "A"), 110000),
+                RankProductMock.create(3L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "A"), 120000),
+                RankProductMock.create(4L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "A"), 130000),
+                RankProductMock.create(5L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "A"), 140000),
+                RankProductMock.create(6L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "A"), 150000),
+                RankProductMock.create(7L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "A"), 160000),
+                RankProductMock.create(8L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "A"), 170000),
 
-                ProductMock.create(9L, CategoryMock.create(1L, "상의"), Brand.create("B"), 140000),
-                ProductMock.create(10L, CategoryMock.create(2L, "아우터"), Brand.create("B"), 100000),
-                ProductMock.create(11L, CategoryMock.create(3L, "바지"), Brand.create("B"), 130000),
-                ProductMock.create(12L, CategoryMock.create(4L, "스니커즈"), Brand.create("B"), 110000),
-                ProductMock.create(13L, CategoryMock.create(5L, "가방"), Brand.create("B"), 140000),
-                ProductMock.create(14L, CategoryMock.create(6L, "모자"), Brand.create("B"), 110000),
-                ProductMock.create(15L, CategoryMock.create(7L, "양말"), Brand.create("B"), 190000),
-                ProductMock.create(16L, CategoryMock.create(8L, "액새서리"), Brand.create("B"), 100000)
+                RankProductMock.create(9L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "B"), 140000),
+                RankProductMock.create(10L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "B"), 100000),
+                RankProductMock.create(11L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "B"), 130000),
+                RankProductMock.create(12L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "B"), 110000),
+                RankProductMock.create(13L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "B"), 140000),
+                RankProductMock.create(14L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "B"), 110000),
+                RankProductMock.create(15L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "B"), 190000),
+                RankProductMock.create(16L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "B"), 100000)
         );
         sortedProductByCategoryLocalRepository.saveAllSorted(products);
 
         //when
-        List<Product> lowPriceProductByCategory = sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory();
+        List<RankProduct> lowPriceProductByCategory = sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory();
 
         //then
         assertEquals(100000, lowPriceProductByCategory.get(0).getPrice());
@@ -135,51 +135,51 @@ class SortedProductByCategoryLocalRepositoryTest {
     @Test
     void delete() {
         //given
-        List<Product> products = List.of(
-                ProductMock.create(1L, CategoryMock.create(1L, "상의"), Brand.create("A"), 100000),
-                ProductMock.create(2L, CategoryMock.create(2L, "아우터"), Brand.create("A"), 110000),
-                ProductMock.create(3L, CategoryMock.create(3L, "바지"), Brand.create("A"), 120000),
-                ProductMock.create(4L, CategoryMock.create(4L, "스니커즈"), Brand.create("A"), 130000),
-                ProductMock.create(5L, CategoryMock.create(5L, "가방"), Brand.create("A"), 140000),
-                ProductMock.create(6L, CategoryMock.create(6L, "모자"), Brand.create("A"), 150000),
-                ProductMock.create(7L, CategoryMock.create(7L, "양말"), Brand.create("A"), 160000),
-                ProductMock.create(8L, CategoryMock.create(8L, "액새서리"), Brand.create("A"), 170000),
+        List<RankProduct> products = List.of(
+                RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 100000),
+                RankProductMock.create(2L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "A"), 110000),
+                RankProductMock.create(3L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "A"), 120000),
+                RankProductMock.create(4L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "A"), 130000),
+                RankProductMock.create(5L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "A"), 140000),
+                RankProductMock.create(6L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "A"), 150000),
+                RankProductMock.create(7L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "A"), 160000),
+                RankProductMock.create(8L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "A"), 170000),
 
-                ProductMock.create(9L, CategoryMock.create(1L, "상의"), Brand.create("B"), 140000),
-                ProductMock.create(10L, CategoryMock.create(2L, "아우터"), Brand.create("B"), 100000),
-                ProductMock.create(11L, CategoryMock.create(3L, "바지"), Brand.create("B"), 130000),
-                ProductMock.create(12L, CategoryMock.create(4L, "스니커즈"), Brand.create("B"), 110000),
-                ProductMock.create(13L, CategoryMock.create(5L, "가방"), Brand.create("B"), 140000),
-                ProductMock.create(14L, CategoryMock.create(6L, "모자"), Brand.create("B"), 110000),
-                ProductMock.create(15L, CategoryMock.create(7L, "양말"), Brand.create("B"), 190000),
-                ProductMock.create(16L, CategoryMock.create(8L, "액새서리"), Brand.create("B"), 100000)
+                RankProductMock.create(9L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "B"), 140000),
+                RankProductMock.create(10L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "B"), 100000),
+                RankProductMock.create(11L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "B"), 130000),
+                RankProductMock.create(12L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "B"), 110000),
+                RankProductMock.create(13L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "B"), 140000),
+                RankProductMock.create(14L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "B"), 110000),
+                RankProductMock.create(15L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "B"), 190000),
+                RankProductMock.create(16L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "B"), 100000)
         );
         sortedProductByCategoryLocalRepository.saveAllSorted(products);
 
-        List<Product> deleteProducts = List.of(
-                ProductMock.create(1L, CategoryMock.create(1L, "상의"), Brand.create("A"), 100000),
-                ProductMock.create(2L, CategoryMock.create(2L, "아우터"), Brand.create("A"), 110000),
-                ProductMock.create(3L, CategoryMock.create(3L, "바지"), Brand.create("A"), 120000),
-                ProductMock.create(4L, CategoryMock.create(4L, "스니커즈"), Brand.create("A"), 130000),
-                ProductMock.create(5L, CategoryMock.create(5L, "가방"), Brand.create("A"), 140000),
-                ProductMock.create(6L, CategoryMock.create(6L, "모자"), Brand.create("A"), 150000),
-                ProductMock.create(7L, CategoryMock.create(7L, "양말"), Brand.create("A"), 160000),
-                ProductMock.create(8L, CategoryMock.create(8L, "액새서리"), Brand.create("A"), 170000)
+        List<RankProduct> deleteProducts = List.of(
+                RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 100000),
+                RankProductMock.create(2L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(1L, "A"), 110000),
+                RankProductMock.create(3L, RankCategoryMock.create(3L, "바지"), RankBrand.create(1L, "A"), 120000),
+                RankProductMock.create(4L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(1L, "A"), 130000),
+                RankProductMock.create(5L, RankCategoryMock.create(5L, "가방"), RankBrand.create(1L, "A"), 140000),
+                RankProductMock.create(6L, RankCategoryMock.create(6L, "모자"), RankBrand.create(1L, "A"), 150000),
+                RankProductMock.create(7L, RankCategoryMock.create(7L, "양말"), RankBrand.create(1L, "A"), 160000),
+                RankProductMock.create(8L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(1L, "A"), 170000)
         );
 
         //when
         sortedProductByCategoryLocalRepository.delete(deleteProducts);
 
         //then
-        List<Product> byCategoryIdIsOne = sortedProductByCategoryLocalRepository.findByCategoryId(1L);
+        List<RankProduct> byCategoryIdIsOne = sortedProductByCategoryLocalRepository.findByCategoryId(1L);
         assertEquals(140000, byCategoryIdIsOne.get(0).getPrice());
         assertEquals(9L, byCategoryIdIsOne.get(0).getId());
         assertEquals(1, byCategoryIdIsOne.size());
-        List<Product> byCategoryIdIsTwo = sortedProductByCategoryLocalRepository.findByCategoryId(2L);
+        List<RankProduct> byCategoryIdIsTwo = sortedProductByCategoryLocalRepository.findByCategoryId(2L);
         assertEquals(100000, byCategoryIdIsTwo.get(0).getPrice());
         assertEquals(10L, byCategoryIdIsTwo.get(0).getId());
         assertEquals(1, byCategoryIdIsTwo.size());
-        List<Product> byCategoryIdIsFive = sortedProductByCategoryLocalRepository.findByCategoryId(5L);
+        List<RankProduct> byCategoryIdIsFive = sortedProductByCategoryLocalRepository.findByCategoryId(5L);
         assertEquals(140000, byCategoryIdIsFive.get(0).getPrice());
         assertEquals(13L, byCategoryIdIsFive.get(0).getId());
         assertEquals(1, byCategoryIdIsFive.size());

@@ -23,7 +23,7 @@ public class BrandProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseEntity<Void> updateProduct(@RequestBody @Valid BrandProductChangeRequest productUpdateRequest) {
         brandProductCrudService.update(productUpdateRequest.toBrandProductChange());
 

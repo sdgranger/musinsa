@@ -1,7 +1,7 @@
 package com.musinsa.shop.service.dto;
 
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.error.NotFoundException;
-import com.musinsa.shop.domain.outfit.entity.Product;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ public class CategoryStatistics {
         this.highestProduct = highestPriceProducts;
     }
 
-    public static CategoryStatistics from(String categoryName, List<Product> sortedProducts) {
+    public static CategoryStatistics from(String categoryName, List<RankProduct> sortedProducts) {
         Long lowestPrice = sortedProducts.stream().findFirst().orElseThrow(NotFoundException::new).getPrice();
         Long highestPrice = sortedProducts.get(sortedProducts.size()-1).getPrice();
         List<BrandProduct> lowestProducts = new ArrayList<>();
         List<BrandProduct> highestProducts = new ArrayList<>();
 
-        for (Product sortedProduct : sortedProducts) {
+        for (RankProduct sortedProduct : sortedProducts) {
             if (Objects.equals(sortedProduct.getPrice(), lowestPrice)) {
                 lowestProducts.add(new BrandProduct(sortedProduct.getBrand().getName(), sortedProduct.getPrice()));
             }

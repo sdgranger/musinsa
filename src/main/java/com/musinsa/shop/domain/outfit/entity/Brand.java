@@ -23,14 +23,6 @@ public class Brand {
         this.products = new ArrayList<>();
     }
 
-    private Brand(String name, List<Product> products) {
-        this.name = name;
-        this.products = products;
-        for (Product product : products) {
-            product.setBrand(this);
-        }
-    }
-
     protected Brand() {
 
     }

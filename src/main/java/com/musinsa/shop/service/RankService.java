@@ -2,10 +2,10 @@ package com.musinsa.shop.service;
 
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Category;
-import com.musinsa.shop.domain.outfit.entity.Product;
 import com.musinsa.shop.domain.outfit.repository.BrandRepository;
 import com.musinsa.shop.domain.outfit.repository.CategoryRepository;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
 import com.musinsa.shop.error.NotFoundException;
 import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
@@ -29,13 +29,13 @@ public class RankService {
     public CategoryStatistics getByCategoryName(String categoryName) {
         Category category = categoryRepository.findByName(categoryName).orElseThrow(NotFoundException::new);
 
-        List<Product> sortedProducts = sortedProductByCategoryLocalRepository.findByCategoryOrderByPriceIsAsc(category.getId());
+        List<RankProduct> sortedProducts = sortedProductByCategoryLocalRepository.findByCategoryOrderByPriceIsAsc(category.getId());
 
         return CategoryStatistics.from(categoryName, sortedProducts);
     }
 
     public List<LowestPriceProductByCategory> getProductOfLowestPriceByCategory() {
-        List<Product> productByCategory = sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory();
+        List<RankProduct> productByCategory = sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory();
         return productByCategory.stream().map(LowestPriceProductByCategory::from).collect(Collectors.toList());
     }
 
@@ -48,5 +48,21 @@ public class RankService {
         Brand brand = brandRepository.findById(brandProduct.getBrandId()).orElseThrow(NotFoundException::new);
 
         return LowestPriceSumProductByBrand.from(brandProduct, brand.getProducts());
+    }
+
+    public void save(Long brandId, String brandName, List<RankProduct> products) {
+        long totalPrice = products.stream().mapToLong(RankProduct::getPrice).sum();
+        sortedProductByCategoryLocalRepository.saveAllSorted(products);
+        brandProductByPriceSumRepository.save(
+                new BrandInfoByLowestPriceSum(brandId, brandName, totalPrice)
+        );
+    }
+
+    public void remove(Long brandId, String brandName, List<RankProduct> products) {
+        long totalPrice = products.stream().mapToLong(RankProduct::getPrice).sum();
+        sortedProductByCategoryLocalRepository.delete(products);
+        brandProductByPriceSumRepository.delete(
+                new BrandInfoByLowestPriceSum(brandId, brandName, totalPrice)
+        );
     }
 }

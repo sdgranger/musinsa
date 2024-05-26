@@ -1,6 +1,6 @@
 package com.musinsa.shop.infrastruture;
 
-import com.musinsa.shop.domain.outfit.entity.Product;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.RankProductByCategoryRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,14 +9,14 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 @Repository
 public class SortedProductByCategoryLocalRepository implements RankProductByCategoryRepository {
-    private final Map<Long, SortedSet<Product>> sortedProductByCategoryId = new ConcurrentSkipListMap<>();
+    private final Map<Long, SortedSet<RankProduct>> sortedProductByCategoryId = new ConcurrentSkipListMap<>();
 
 
     @Override
-    public void saveAllSorted(Iterable<Product> products) {
-        for (Product product : products) {
+    public void saveAllSorted(Iterable<RankProduct> products) {
+        for (RankProduct product : products) {
             if (sortedProductByCategoryId.get(product.getCategory().getId()) == null) {
-                TreeSet<Product> treeSet = new TreeSet<>((o1, o2) -> {
+                TreeSet<RankProduct> treeSet = new TreeSet<>((o1, o2) -> {
                     if (o1.equals(o2)) {
                         return 0;
                     }
@@ -26,7 +26,7 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
                 treeSet.add(product);
                 sortedProductByCategoryId.put(product.getCategory().getId(), treeSet);
             } else {
-                SortedSet<Product> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
+                SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
                 boolean contains = treeSet.contains(product);
                 if (contains) {
                     treeSet.remove(product);
@@ -40,8 +40,8 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
     }
 
     @Override
-    public List<Product> findLowestPriceProductByCategory() {
-        List<Product> list = new ArrayList<>();
+    public List<RankProduct> findLowestPriceProductByCategory() {
+        List<RankProduct> list = new ArrayList<>();
         for (Long key : sortedProductByCategoryId.keySet()) {
             list.add(sortedProductByCategoryId.get(key).first());
         }
@@ -49,18 +49,18 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
     }
 
     @Override
-    public List<Product> findByCategoryId(Long categoryId) {
+    public List<RankProduct> findByCategoryId(Long categoryId) {
         return sortedProductByCategoryId.get(categoryId).stream().toList();
     }
 
-    public List<Product> findByCategoryOrderByPriceIsAsc(Long categoryId) {
+    public List<RankProduct> findByCategoryOrderByPriceIsAsc(Long categoryId) {
         return sortedProductByCategoryId.get(categoryId).stream().toList();
     }
 
     @Override
-    public void delete(List<Product> products) {
-        for (Product product : products) {
-            SortedSet<Product> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
+    public void delete(List<RankProduct> products) {
+        for (RankProduct product : products) {
+            SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
             if (treeSet != null) {
                 treeSet.remove(product);
             }

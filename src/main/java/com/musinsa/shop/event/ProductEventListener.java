@@ -1,48 +1,47 @@
 package com.musinsa.shop.event;
 
-import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
-import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
-import com.musinsa.shop.infrastruture.BrandProductByPriceSumLocalRepository;
-import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
+import com.musinsa.shop.domain.rank.entity.RankBrand;
+import com.musinsa.shop.domain.rank.entity.RankCategory;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
+import com.musinsa.shop.service.RankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class ProductEventListener {
-    private final BrandProductByPriceSumLocalRepository lowestPriceProductByBrandInMemoryRepository;
-    private final SortedProductByCategoryLocalRepository sortedProductByCategoryLocalRepository;
+    private final RankService rankService;
 
     @EventListener
     public void created(BrandProductCreatedEvent event) {
-        save(event.getBrand(), event.getProducts());
+        rankService.save(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
     }
 
     @EventListener
     public void changed(BrandProductChangedEvent event) {
-        save(event.getBrand(), event.getProducts());
+        rankService.save(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
     }
 
     @EventListener
     public void removed(BrandProductRemoveEvent event) {
-        long totalPrice = event.getProducts().stream().mapToLong(Product::getPrice).sum();
-        sortedProductByCategoryLocalRepository.delete(event.getProducts());
-        lowestPriceProductByBrandInMemoryRepository.delete(
-                new BrandInfoByLowestPriceSum(event.getBrand().getId(), event.getBrand().getName(), totalPrice)
-        );
+        rankService.remove(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
     }
 
-    private void save(Brand brand, List<Product> event1) {
-        long totalPrice = event1.stream().mapToLong(Product::getPrice).sum();
-        sortedProductByCategoryLocalRepository.saveAllSorted(event1);
-        lowestPriceProductByBrandInMemoryRepository.save(
-                new BrandInfoByLowestPriceSum(brand.getId(), brand.getName(), totalPrice)
-        );
+    private List<RankProduct> convert(List<Product> products) {
+
+        return products.stream().map(this::from).collect(Collectors.toList());
     }
 
+    private RankProduct from(Product product) {
+        return RankProduct.create(product.getId(),
+                RankCategory.create(product.getCategory().getId(), product.getCategoryName()),
+                RankBrand.create(product.getBrand().getId(), product.getBrand().getName()), product.getPrice()
+        );
+    }
 
 }

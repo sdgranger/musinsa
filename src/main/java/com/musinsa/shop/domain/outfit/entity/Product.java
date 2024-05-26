@@ -33,7 +33,6 @@ public class Product {
         this.category = category;
         this.brand = brand;
         this.price = price;
-        this.brand.addProduct(this);
     }
 
     public static Product create(Category category, Brand brand, long price) {
