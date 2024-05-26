@@ -28,3 +28,8 @@ spring:
     init:
       mode: always
       platform: h2
+
+springdoc:
+  swagger-ui:
+    enabled: true
+  default-produces-media-type: application/json
