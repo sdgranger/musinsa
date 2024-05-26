@@ -36,7 +36,6 @@ public class BrandProductCrudService {
         CategoryStorage categoryStorage = categoryService.find();
 
         Brand brand = Brand.create(productAdd.getBrandName());
-        List<Product> savedProducts = new ArrayList<>();
         for (BrandProductAdd.CategoryProductAdd categoryProduct : productAdd.getCategoryProductAdd()) {
             Category category = categoryStorage.find(categoryProduct.getCategoryName());
             Product newProduct = Product.create(category, brand, categoryProduct.getPrice());
@@ -44,7 +43,7 @@ public class BrandProductCrudService {
         }
         brandRepository.save(brand);
 
-        applicationEventPublisher.publishEvent(new BrandProductCreatedEvent(brand, savedProducts));
+        applicationEventPublisher.publishEvent(new BrandProductCreatedEvent(brand));
     }
 
     @Transactional
@@ -60,7 +59,7 @@ public class BrandProductCrudService {
             product.changePrice(productChangeContext.getByCategoryName(product.getCategoryName()));
         }
 
-        applicationEventPublisher.publishEvent(new BrandProductChangedEvent(brand, products));
+        applicationEventPublisher.publishEvent(new BrandProductChangedEvent(brand));
 
         return products;
     }
@@ -75,10 +74,8 @@ public class BrandProductCrudService {
     @Transactional
     public void delete(String brandName) {
         Brand brand = brandRepository.findByName(brandName).orElseThrow(NotFoundException::new);
-        List<Product> products = brand.getProducts();
-
         brandRepository.delete(brand);
 
-        applicationEventPublisher.publishEvent(new BrandProductRemoveEvent(brand, products));
+        applicationEventPublisher.publishEvent(new BrandProductRemoveEvent(brand));
     }
 }

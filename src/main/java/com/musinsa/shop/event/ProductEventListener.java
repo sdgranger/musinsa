@@ -1,5 +1,6 @@
 package com.musinsa.shop.event;
 
+import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
 import com.musinsa.shop.domain.rank.entity.RankBrand;
 import com.musinsa.shop.domain.rank.entity.RankCategory;
@@ -19,17 +20,20 @@ public class ProductEventListener {
 
     @EventListener
     public void created(BrandProductCreatedEvent event) {
-        rankService.save(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
+        Brand brand = event.brand();
+        rankService.save(brand.getId(), brand.getName(), convert(brand.getProducts()));
     }
 
     @EventListener
     public void changed(BrandProductChangedEvent event) {
-        rankService.save(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
+        Brand brand = event.brand();
+        rankService.save(brand.getId(), brand.getName(), convert(brand.getProducts()));
     }
 
     @EventListener
     public void removed(BrandProductRemoveEvent event) {
-        rankService.remove(event.getBrand().getId(), event.getBrand().getName(), convert(event.getProducts()));
+        Brand brand = event.brand();
+        rankService.remove(brand.getId(), brand.getName(), convert(brand.getProducts()));
     }
 
     private List<RankProduct> convert(List<Product> products) {
