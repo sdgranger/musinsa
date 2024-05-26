@@ -1,5 +1,6 @@
 package com.musinsa.shop.domain.outfit.entity;
 
+import com.musinsa.shop.error.InvalidArgumentException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -25,8 +26,6 @@ public class Product {
         this.category = category;
         this.brand = brand;
         this.price = price;
-
-        this.brand.addProduct(this);
     }
 
     protected Product(Long id, Category category, Brand brand, long price) {
@@ -43,7 +42,7 @@ public class Product {
 
     public void changePrice(Long price) {
         if (price == null) {
-            throw new IllegalArgumentException();
+            throw new InvalidArgumentException();
         }
         this.price = price;
     }
@@ -55,5 +54,9 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 }

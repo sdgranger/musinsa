@@ -25,4 +25,8 @@ public class Category {
         this.name = name;
     }
 
+    public static Category create(String name) {
+        return new Category(name);
+    }
+
 }
