@@ -16,14 +16,14 @@ public class BrandProductController {
 
     private final BrandProductCrudService brandProductCrudService;
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Void> addProduct(@RequestBody @Valid BrandProductAddRequest productAddRequest) {
         brandProductCrudService.add(productAddRequest.toBrandProductAdd());
 
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping
+    @PatchMapping
     public ResponseEntity<Void> updateProduct(@RequestBody @Valid BrandProductChangeRequest productUpdateRequest) {
         brandProductCrudService.update(productUpdateRequest.toBrandProductChange());
 
