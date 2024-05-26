@@ -12,7 +12,7 @@
   ~~~
 - 고객은 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 확인
   ~~~
-  GET /api/rank/brand/lowest-price-sum
+  GET /api/rank/category/products
   ~~~
 ### 구현
 <img src="./img2.png">
