@@ -1,10 +1,12 @@
 package com.musinsa.shop.service;
 
-import com.musinsa.shop.domain.outfit.entity.*;
+import com.musinsa.shop.domain.outfit.entity.Brand;
+import com.musinsa.shop.domain.outfit.entity.CategoryMock;
+import com.musinsa.shop.domain.outfit.entity.ProductMock;
+import com.musinsa.shop.domain.outfit.entity.RankProductMock;
 import com.musinsa.shop.domain.outfit.repository.BrandRepository;
 import com.musinsa.shop.domain.outfit.repository.CategoryRepository;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
-import com.musinsa.shop.domain.rank.entity.RankBrand;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
 import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
 import com.musinsa.shop.service.dto.CategoryStatistics;
@@ -48,12 +50,12 @@ class RankServiceTest {
         given(sortedProductByCategoryLocalRepository.findByCategoryOrderByPriceIsAsc(1L))
                 .willReturn(
                         List.of(
-                                RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(2L, "B"), 100000),
-                                RankProductMock.create(2L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 110000),
-                                RankProductMock.create(3L, RankCategoryMock.create(1L, "상의"), RankBrand.create(3L, "C"), 120000),
-                                RankProductMock.create(4L, RankCategoryMock.create(1L, "상의"), RankBrand.create(4L, "D"), 130000),
-                                RankProductMock.create(5L, RankCategoryMock.create(1L, "상의"), RankBrand.create(5L, "E"), 140000),
-                                RankProductMock.create(6L, RankCategoryMock.create(1L, "상의"), RankBrand.create(6L, "F"), 140000)
+                                RankProductMock.create(1L, 1L, "상의", "B", 100000),
+                                RankProductMock.create(2L, 1L, "상의", "A", 110000),
+                                RankProductMock.create(3L, 1L, "상의", "C", 120000),
+                                RankProductMock.create(4L, 1L, "상의", "D", 130000),
+                                RankProductMock.create(5L, 1L, "상의", "E", 140000),
+                                RankProductMock.create(6L, 1L, "상의", "F", 140000)
                         )
 
                 );
@@ -82,14 +84,14 @@ class RankServiceTest {
     void getProductOfLowestPriceByCategory() {
         given(sortedProductByCategoryLocalRepository.findLowestPriceProductByCategory())
                 .willReturn(List.of(
-                        RankProductMock.create(1L, RankCategoryMock.create(1L, "상의"), RankBrand.create(1L, "A"), 100000),
-                        RankProductMock.create(12L, RankCategoryMock.create(2L, "아우터"), RankBrand.create(3L, "C"), 110000),
-                        RankProductMock.create(23L, RankCategoryMock.create(3L, "바지"), RankBrand.create(5L, "E"), 120000),
-                        RankProductMock.create(34L, RankCategoryMock.create(4L, "스니커즈"), RankBrand.create(7L, "G"), 130000),
-                        RankProductMock.create(45L, RankCategoryMock.create(5L, "가방"), RankBrand.create(2L, "B"), 140000),
-                        RankProductMock.create(56L, RankCategoryMock.create(6L, "모자"), RankBrand.create(4L, "D"), 150000),
-                        RankProductMock.create(67L, RankCategoryMock.create(7L, "양말"), RankBrand.create(6L, "F"), 160000),
-                        RankProductMock.create(78L, RankCategoryMock.create(8L, "액새서리"), RankBrand.create(8L, "H"), 170000)
+                        RankProductMock.create(1L, 1L, "상의", "A", 100000),
+                        RankProductMock.create(12L, 2L, "아우터", "C", 110000),
+                        RankProductMock.create(23L, 3L, "바지", "E", 120000),
+                        RankProductMock.create(34L, 4L, "스니커즈","G", 130000),
+                        RankProductMock.create(45L, 5L, "가방", "B", 140000),
+                        RankProductMock.create(56L, 6L, "모자", "D", 150000),
+                        RankProductMock.create(67L, 7L, "양말", "F", 160000),
+                        RankProductMock.create(78L, 8L, "액새서리", "H", 170000)
                         )
                 );
 

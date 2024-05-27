@@ -15,7 +15,7 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
     @Override
     public void saveAllSorted(Iterable<RankProduct> products) {
         for (RankProduct product : products) {
-            if (sortedProductByCategoryId.get(product.getCategory().getId()) == null) {
+            if (sortedProductByCategoryId.get(product.getCategoryId()) == null) {
                 TreeSet<RankProduct> treeSet = new TreeSet<>((o1, o2) -> {
                     if (o1.equals(o2)) {
                         return 0;
@@ -24,9 +24,9 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
                     return o1.getPrice() > o2.getPrice() ? 1 : -1;
                 });
                 treeSet.add(product);
-                sortedProductByCategoryId.put(product.getCategory().getId(), treeSet);
+                sortedProductByCategoryId.put(product.getCategoryId(), treeSet);
             } else {
-                SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
+                SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategoryId());
                 boolean contains = treeSet.contains(product);
                 if (contains) {
                     treeSet.remove(product);
@@ -60,7 +60,7 @@ public class SortedProductByCategoryLocalRepository implements RankProductByCate
     @Override
     public void delete(List<RankProduct> products) {
         for (RankProduct product : products) {
-            SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategory().getId());
+            SortedSet<RankProduct> treeSet = sortedProductByCategoryId.get(product.getCategoryId());
             if (treeSet != null) {
                 treeSet.remove(product);
             }

@@ -3,8 +3,6 @@ package com.musinsa.shop.domain.rank.service;
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
-import com.musinsa.shop.domain.rank.entity.RankBrand;
-import com.musinsa.shop.domain.rank.entity.RankCategory;
 import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
 import com.musinsa.shop.domain.rank.repository.RankProductByCategoryRepository;
@@ -39,8 +37,7 @@ public class RankAggregator {
     }
 
     private RankProduct from(Product product) {
-        return RankProduct.create(product.getId(), RankCategory.create(product.getCategory().getId(), product.getCategoryName()),
-                RankBrand.create(product.getBrand().getId(), product.getBrand().getName()), product.getPrice());
+        return RankProduct.create(product.getId(), product.getCategory().getId(), product.getCategoryName(), product.getBrand().getName(), product.getPrice());
     }
 
     private void aggregateLowestPriceProductByBrand() {

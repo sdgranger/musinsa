@@ -18,6 +18,6 @@ public class LowestPriceProductByCategory {
     }
 
     public static LowestPriceProductByCategory from(RankProduct product) {
-        return new LowestPriceProductByCategory(product.getId(), product.getBrand().getName(), product.getCategoryName(), product.getPrice());
+        return new LowestPriceProductByCategory(product.getId(), product.getBrandName(), product.getCategoryName(), product.getPrice());
     }
 }

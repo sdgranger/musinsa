@@ -28,10 +28,10 @@ public class CategoryStatistics {
 
         for (RankProduct sortedProduct : sortedProducts) {
             if (Objects.equals(sortedProduct.getPrice(), lowestPrice)) {
-                lowestProducts.add(new BrandProduct(sortedProduct.getBrand().getName(), sortedProduct.getPrice()));
+                lowestProducts.add(new BrandProduct(sortedProduct.getBrandName(), sortedProduct.getPrice()));
             }
             if (Objects.equals(sortedProduct.getPrice(), highestPrice)) {
-                highestProducts.add(new BrandProduct(sortedProduct.getBrand().getName(), sortedProduct.getPrice()));
+                highestProducts.add(new BrandProduct(sortedProduct.getBrandName(), sortedProduct.getPrice()));
             }
         }
 
