@@ -15,8 +15,11 @@
   GET /api/rank/category/products
   ~~~
 ### 구현
-<img src="./img2.png">
-- data.sql 로 구동 시 상품 데이터를 세팅하였고 ApplicationRunner 로 조회를 위한 데이터를 수집(Aggregator)했습니다.
+<img src="./img2.png"> 
+
+- data.sql 로 구동 시 상품 초기 데이터를 세팅하였고 ApplicationRunner 로 조회를 위한 데이터를 수집(Aggregator)했습니다.  
+- 데이터 수집 시 최고,최저가 상품과 브랜드 총액 정렬을 위해 SortedTree 자료구조를 저장소로 활용했습니다.
+- 브랜드, 카테고리 조회를 id 로 식별해는것이 좋지만 요구사항 환경에 맞추어 name 으로 조회하게 했습니다.
 
 ---
 
