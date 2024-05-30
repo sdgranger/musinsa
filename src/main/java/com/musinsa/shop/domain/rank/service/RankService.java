@@ -1,15 +1,8 @@
 package com.musinsa.shop.domain.rank.service;
 
-import com.musinsa.shop.domain.outfit.entity.Brand;
-import com.musinsa.shop.domain.outfit.entity.Category;
-import com.musinsa.shop.domain.outfit.repository.BrandRepository;
-import com.musinsa.shop.domain.outfit.repository.CategoryRepository;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
 import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
-import com.musinsa.shop.domain.rank.service.BrandProductExtractor;
-import com.musinsa.shop.domain.rank.service.CategoryNamingCenter;
-import com.musinsa.shop.domain.rank.service.CategoryTag;
 import com.musinsa.shop.error.NotFoundException;
 import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
 import com.musinsa.shop.service.dto.CategoryStatistics;
