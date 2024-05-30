@@ -2,6 +2,7 @@ package com.musinsa.shop.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.musinsa.shop.service.dto.CategoryStatistics;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.text.DecimalFormat;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 public class CategoryProductsStatusResponse {
     @JsonProperty("카테고리")
+    @Schema(name = "카테고리", example = "아우터")
     private String category;
     @JsonProperty("최저가")
     private List<BrandProductResponse> lowest;
@@ -33,8 +35,10 @@ public class CategoryProductsStatusResponse {
     @Getter
     public static class BrandProductResponse {
         @JsonProperty("브랜드")
+        @Schema(name = "브랜드", example = "A")
         private final String brandName;
         @JsonProperty("가격")
+        @Schema(name = "가격", example = "2,300")
         private final String price;
 
         private BrandProductResponse(String brandName, Long price) {
