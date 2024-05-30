@@ -1,7 +1,7 @@
 package com.musinsa.shop.service.dto;
 
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
-import com.musinsa.shop.domain.outfit.entity.Product;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 import lombok.Getter;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public class LowestPriceSumProductByBrand {
         this.totalPrice = categoryProductResponse.stream().mapToLong(dto -> dto.price).sum();
     }
 
-    public static LowestPriceSumProductByBrand from(BrandInfoByLowestPriceSum brandProductByPriceSum, List<Product> products) {
+    public static LowestPriceSumProductByBrand from(BrandInfoByLowestPriceSum brandProductByPriceSum, List<RankProduct> products) {
         List<CategoryProduct> productDto = products.stream()
-                .map(categoryProduct -> CategoryProduct.create(categoryProduct.getCategory().getName(), categoryProduct.getPrice()))
+                .map(categoryProduct -> CategoryProduct.create(categoryProduct.getCategoryName(), categoryProduct.getPrice()))
                 .collect(Collectors.toList());
         return new LowestPriceSumProductByBrand(brandProductByPriceSum.getBrandName(), productDto);
     }

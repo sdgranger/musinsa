@@ -6,7 +6,7 @@ import com.musinsa.shop.controller.response.LowestPriceProductByCategoryResponse
 import com.musinsa.shop.service.dto.CategoryStatistics;
 import com.musinsa.shop.service.dto.LowestPriceSumProductByBrand;
 import com.musinsa.shop.service.dto.LowestPriceProductByCategory;
-import com.musinsa.shop.service.RankService;
+import com.musinsa.shop.domain.rank.service.RankService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

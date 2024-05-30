@@ -1,4 +1,4 @@
-package com.musinsa.shop.service;
+package com.musinsa.shop.domain.rank.service;
 
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Category;
@@ -7,6 +7,9 @@ import com.musinsa.shop.domain.outfit.repository.CategoryRepository;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
 import com.musinsa.shop.domain.rank.entity.RankProduct;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
+import com.musinsa.shop.domain.rank.service.BrandProductExtractor;
+import com.musinsa.shop.domain.rank.service.CategoryNamingCenter;
+import com.musinsa.shop.domain.rank.service.CategoryTag;
 import com.musinsa.shop.error.NotFoundException;
 import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
 import com.musinsa.shop.service.dto.CategoryStatistics;
@@ -21,13 +24,13 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class RankService {
-    private final CategoryRepository categoryRepository;
-    private final BrandRepository brandRepository;
+    private final CategoryNamingCenter categoryNamingCenter;
+    private final BrandProductExtractor brandProductExtractor;
     private final SortedProductByCategoryLocalRepository sortedProductByCategoryLocalRepository;
     private final BrandProductByPriceSumRepository brandProductByPriceSumRepository;
 
     public CategoryStatistics getByCategoryName(String categoryName) {
-        Category category = categoryRepository.findByName(categoryName).orElseThrow(NotFoundException::new);
+        CategoryTag category = categoryNamingCenter.findByName(categoryName).orElseThrow(NotFoundException::new);
 
         List<RankProduct> sortedProducts = sortedProductByCategoryLocalRepository.findByCategoryOrderByPriceIsAsc(category.getId());
 
@@ -45,9 +48,9 @@ public class RankService {
             throw new NotFoundException();
         }
 
-        Brand brand = brandRepository.findById(brandProduct.getBrandId()).orElseThrow(NotFoundException::new);
+        List<RankProduct> products = brandProductExtractor.findByBrandId(brandProduct.getBrandId());
 
-        return LowestPriceSumProductByBrand.from(brandProduct, brand.getProducts());
+        return LowestPriceSumProductByBrand.from(brandProduct, products);
     }
 
     public void save(Long brandId, String brandName, List<RankProduct> products) {

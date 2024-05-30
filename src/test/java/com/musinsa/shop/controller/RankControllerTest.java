@@ -3,7 +3,7 @@ package com.musinsa.shop.controller;
 import com.musinsa.shop.controller.response.LowestPriceProductByCategoryResponse;
 import com.musinsa.shop.domain.outfit.entity.Category;
 import com.musinsa.shop.service.dto.LowestPriceProductByCategory;
-import com.musinsa.shop.service.RankService;
+import com.musinsa.shop.domain.rank.service.RankService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

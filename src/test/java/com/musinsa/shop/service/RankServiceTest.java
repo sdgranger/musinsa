@@ -8,6 +8,7 @@ import com.musinsa.shop.domain.outfit.repository.BrandRepository;
 import com.musinsa.shop.domain.outfit.repository.CategoryRepository;
 import com.musinsa.shop.domain.rank.entity.BrandInfoByLowestPriceSum;
 import com.musinsa.shop.domain.rank.repository.BrandProductByPriceSumRepository;
+import com.musinsa.shop.domain.rank.service.RankService;
 import com.musinsa.shop.infrastruture.SortedProductByCategoryLocalRepository;
 import com.musinsa.shop.service.dto.CategoryStatistics;
 import com.musinsa.shop.service.dto.LowestPriceProductByCategory;

@@ -1,12 +1,14 @@
 package com.musinsa.shop.domain.rank.service;
 
-import com.musinsa.shop.domain.outfit.entity.Brand;
-import com.musinsa.shop.domain.outfit.entity.Product;
+import com.musinsa.shop.domain.rank.entity.BrandStatus;
+import com.musinsa.shop.domain.rank.entity.RankProduct;
 
 import java.util.List;
 
 public interface BrandProductExtractor {
-    List<Product> findAllProducts();
+    List<RankProduct> findAllProducts();
 
-    List<Brand> findAllBrand();
+    List<BrandStatus> findAllBrand();
+
+    List<RankProduct> findByBrandId(Long brandId);
 }

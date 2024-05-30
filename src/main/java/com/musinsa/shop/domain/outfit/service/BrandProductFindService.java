@@ -3,6 +3,7 @@ package com.musinsa.shop.domain.outfit.service;
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
 import com.musinsa.shop.domain.outfit.repository.BrandRepository;
+import com.musinsa.shop.error.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +22,10 @@ public class BrandProductFindService {
 
     public List<Brand> findAllBrand() {
         return brandRepository.findAll();
+    }
+
+    public List<Product> findByBrandId(Long brandId) {
+        Brand brand = brandRepository.findById(brandId).orElseThrow(NotFoundException::new);
+        return brand.getProducts();
     }
 }

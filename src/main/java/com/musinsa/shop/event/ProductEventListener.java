@@ -3,7 +3,7 @@ package com.musinsa.shop.event;
 import com.musinsa.shop.domain.outfit.entity.Brand;
 import com.musinsa.shop.domain.outfit.entity.Product;
 import com.musinsa.shop.domain.rank.entity.RankProduct;
-import com.musinsa.shop.service.RankService;
+import com.musinsa.shop.domain.rank.service.RankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
